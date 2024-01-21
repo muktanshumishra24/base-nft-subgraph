@@ -1,6 +1,6 @@
 specVersion: 0.0.5
 schema:
-  file: ./schema.graphql
+  file: schema.graphql
 dataSources:
   - kind: ethereum
     name: basenft
@@ -18,21 +18,21 @@ dataSources:
         - Owner
       abis:
         - name: basenft
-          file: ./abis/basenft.json
+          file: basenft/abis/basenft.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransfer
-      file: ./src/basenft.ts
+      file: basenft/basenft.wasm
 templates:
-    - name: BaseNftMetadata
-      kind: file/ipfs
-      mapping:
-          apiVersion: 0.0.7
-          language: wasm/assemblyscript
-          file: ./src/basenft.ts
-          handler: handleMetadata
-          entities:
-              - BaseNftMetadata
-          abis:
-              - name: basenft
-                file: ./abis/basenft.json
+  - name: BaseNftMetadata
+    kind: file/ipfs
+    mapping:
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      file: basenft/basenft.wasm
+      handler: handleMetadata
+      entities:
+        - BaseNftMetadata
+      abis:
+        - name: basenft
+          file: BaseNftMetadata/abis/basenft.json
